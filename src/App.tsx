@@ -25,6 +25,8 @@ function App() {
     prevCol: ColumnType,
     currCol: ColumnType
   ) {
+    if (prevCol === currCol) return
+
     const copyBoard = { ...board }
     const item = copyBoard[prevCol].get(data.itemId)
     if (item) {
