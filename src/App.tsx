@@ -12,13 +12,24 @@ export type BoardItem = {
 type Board = Record<ColumnType, Map<number, BoardItem>>
 
 const initialBoard: Board = {
-  todo: new Map([[1, { itemId: 1, colId: 'todo', value: 'Build Dashboard' }]]),
+  todo: new Map([[1, { itemId: 1, colId: 'todo', value: 'Build Dashboard' }]]), // [[1, { itemId: 1, colId: 'todo', value: 'Build Dashboard' }]]
   in_progress: new Map(),
   done: new Map()
 }
 
 function App() {
   const [board, setBoard] = useState<Board>(initialBoard)
+  const [displayForm, setDisplayForm] = useState(false)
+
+  function createNewCard(value: string) {
+    const copyBoard = { ...board }
+    const numOfItems = copyBoard.todo.size
+    const itemId = numOfItems + 1
+
+    copyBoard.todo.set(itemId, { colId: 'todo', itemId, value })
+    setBoard(copyBoard)
+    setDisplayForm(false)
+  }
 
   function handleCardDrop(
     data: BoardItem,
@@ -44,7 +55,11 @@ function App() {
         key={colId}
         colId={colId as ColumnType}
         items={listItems}
+        displayForm={displayForm}
         onColumnDrop={handleCardDrop}
+        onAddNewCard={() => setDisplayForm(true)}
+        createNewCard={createNewCard}
+        hideForm={() => setDisplayForm(false)}
       />
     )
   })
