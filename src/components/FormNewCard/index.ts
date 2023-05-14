@@ -1,0 +1,1 @@
+export { FormNewCard } from './FormNewCard'
