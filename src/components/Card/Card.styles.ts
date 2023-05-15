@@ -2,7 +2,7 @@ import { styled } from '@/config'
 
 export const Wrapper = styled('div', {
   height: 'auto',
-  backgroundColor: '$blue900',
+  backgroundColor: '$gray800',
   width: '100%',
   borderRadius: '$rounded',
   padding: '$sm',

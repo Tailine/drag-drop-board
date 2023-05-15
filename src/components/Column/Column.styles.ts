@@ -2,11 +2,11 @@ import { styled } from '@/config'
 
 export const Wrapper = styled('section', {
   margin: '0 1rem',
-  backgroundColor: '$blue800',
+  backgroundColor: '$gray900',
   width: '30%',
   minHeight: '70vh',
   borderRadius: '.5rem',
-  border: '1px solid $blue700',
+  border: '1px solid $gray700',
   padding: '0 $md',
   maxHeight: '500px',
   overflowY: 'scroll',
@@ -19,7 +19,7 @@ export const Header = styled('header', {
   position: 'sticky',
   height: '50px',
   top: 0,
-  backgroundColor: '$blue800'
+  backgroundColor: '$gray900'
 })
 
 export const TitleContainer = styled('div', {
@@ -36,7 +36,7 @@ export const Title = styled('h3', {
 export const TotalCards = styled('p', {
   padding: '0.2rem .5rem',
   borderRadius: '$rounded',
-  backgroundColor: '$blue400',
+  backgroundColor: '$orange',
   marginLeft: '$xs',
   color: '$gray'
 })
@@ -45,6 +45,7 @@ export const AddButton = styled('button', {
   border: 0,
   background: 'transparent',
   cursor: 'pointer',
+  height: '16px',
 
   img: {
     width: '1.6rem'

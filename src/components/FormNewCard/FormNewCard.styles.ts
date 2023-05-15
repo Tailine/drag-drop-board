@@ -9,14 +9,11 @@ export const Textarea = styled('textarea', {
   resize: 'none',
   background: 'transparent',
   borderRadius: '$rounded',
-  border: '1px solid $blue700',
+  border: '1px solid $gray600',
   padding: '.3rem',
   color: '$gray',
   fontSize: '$md',
   paddingLeft: '$xs',
-  // '&:focus': {
-  //   outline: '1px solid $blue500'
-  // },
   '&::placeholder': {
     color: '$gray'
   }
@@ -30,13 +27,13 @@ export const Button = styled('button', {
 })
 
 export const CancelButton = styled(Button, {
-  border: '1px solid $blue700',
+  border: '1px solid $gray600',
   background: 'transparent',
   marginRight: '$xs'
 })
 
 export const SubmitButton = styled(Button, {
-  backgroundColor: '$blue600',
+  backgroundColor: '$blue',
   border: 0
 })
 
