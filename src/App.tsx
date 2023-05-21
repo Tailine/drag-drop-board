@@ -19,16 +19,16 @@ const initialBoard: Board = {
 
 function App() {
   const [board, setBoard] = useState<Board>(initialBoard)
-  const [displayForm, setDisplayForm] = useState(false)
+  const [isFormDisplayed, setIsFormDisplayed] = useState(false)
 
   function createNewCard(value: string) {
     const copyBoard = { ...board }
-    const numOfItems = copyBoard.todo.size
-    const itemId = numOfItems + 1
+    const lastItemId = Array.from(copyBoard.todo)[copyBoard.todo.size - 1][0]
+    const itemId = lastItemId + 1
 
     copyBoard.todo.set(itemId, { colId: 'todo', itemId, value })
     setBoard(copyBoard)
-    setDisplayForm(false)
+    setIsFormDisplayed(false)
   }
 
   function handleCardDrop(
