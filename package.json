@@ -1,5 +1,5 @@
 {
-  "name": "kanban",
+  "name": "drag-drop-board",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -13,6 +13,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@radix-ui/react-icons": "^1.3.0",
     "@stitches/react": "^1.2.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
