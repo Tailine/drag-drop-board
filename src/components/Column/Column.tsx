@@ -16,28 +16,56 @@ type Props = {
   colId: ColumnType
   items: BoardItem[]
   displayForm: boolean
+  editCardData?: BoardItem
   onColumnDrop(data: BoardItem, prevCol: ColumnType, currCol: ColumnType): void
   onAddNewCard(): void
   createNewCard(value: string): void
   hideForm(): void
-  handleCardDelete(colId: ColumnType, itemId: number): void
+  onDeleteCard(colId: ColumnType, itemId: number): void
+  onEditCard(cardData: BoardItem): void
+  editCard(cardData: BoardItem): void
 }
 
 export function Column({
   colId,
   items,
   displayForm,
+  editCardData,
   onColumnDrop,
   onAddNewCard,
   createNewCard,
   hideForm,
-  handleCardDelete
+  onDeleteCard,
+  onEditCard,
+  editCard
 }: Props) {
   const isTodoCol = colId === 'todo'
 
-  function onDeleteCard(id: number) {
-    handleCardDelete(colId, id)
+  function handleDelete(id: number) {
+    onDeleteCard(colId, id)
   }
+
+  const cards = items.map((item) => {
+    if (editCardData?.itemId === item.itemId) {
+      return (
+        <FormNewCard
+          key="edit-form"
+          initialValue={editCardData}
+          createNewCard={createNewCard}
+          editCard={editCard}
+          onCancel={hideForm}
+        />
+      )
+    }
+    return (
+      <CardBoard
+        key={item.itemId}
+        data={item}
+        onDelete={handleDelete}
+        onEdit={onEditCard}
+      />
+    )
+  })
 
   return (
     <S.Wrapper
@@ -48,7 +76,6 @@ export function Column({
         const movedCard: BoardItem = JSON.parse(
           e.dataTransfer.getData('text/plain')
         )
-        console.log({ movedCard })
         onColumnDrop(movedCard, movedCard.colId, colId)
       }}
     >
@@ -63,12 +90,10 @@ export function Column({
           </S.AddButton>
         )}
       </S.Header>
-      {isTodoCol && displayForm && (
+      {!editCardData && isTodoCol && displayForm && (
         <FormNewCard onCancel={hideForm} createNewCard={createNewCard} />
       )}
-      {items.map((item) => (
-        <CardBoard key={item.itemId} data={item} onDelete={onDeleteCard} />
-      ))}
+      {cards}
     </S.Wrapper>
   )
 }

@@ -2,15 +2,16 @@ import { BoardItem } from '@/App'
 import * as S from './CardBoard.styles'
 import { DragEvent } from 'react'
 import { useRef } from 'react'
-import { TrashIcon } from '@radix-ui/react-icons'
+import { TrashIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import { Card } from '@/components/Card'
 
 type Props = {
   data: BoardItem
   onDelete(id: number): void
+  onEdit(cardData: BoardItem): void
 }
 
-export function CardBoard({ data, onDelete }: Props) {
+export function CardBoard({ data, onDelete, onEdit }: Props) {
   const dragItem = useRef<HTMLDivElement>(null)
 
   function handleDragStart(e: DragEvent<HTMLDivElement>) {
@@ -19,6 +20,10 @@ export function CardBoard({ data, onDelete }: Props) {
 
   function handleDelete() {
     onDelete(data.itemId)
+  }
+
+  function handleEdit() {
+    onEdit(data)
   }
 
   return (
@@ -30,9 +35,14 @@ export function CardBoard({ data, onDelete }: Props) {
     >
       <S.Content>
         <S.Paragraph>{data.value}</S.Paragraph>
-        <S.Button onClick={handleDelete}>
-          <TrashIcon />
-        </S.Button>
+        <S.Actions>
+          <S.Button onClick={handleDelete}>
+            <TrashIcon />
+          </S.Button>
+          <S.Button onClick={handleEdit}>
+            <Pencil1Icon />
+          </S.Button>
+        </S.Actions>
       </S.Content>
     </Card>
   )

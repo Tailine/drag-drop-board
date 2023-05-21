@@ -1,5 +1,9 @@
 import { styled } from '@/config'
 
+export const Actions = styled('div', {
+  display: 'flex'
+})
+
 export const Button = styled('button', {
   border: 0,
   padding: '.3rem',
@@ -9,6 +13,7 @@ export const Button = styled('button', {
   alignItems: 'center',
   color: '$gray400',
   cursor: 'pointer',
+  marginLeft: '$xs',
   svg: {
     display: 'flex'
   },

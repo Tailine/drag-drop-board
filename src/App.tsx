@@ -20,6 +20,7 @@ const initialBoard: Board = {
 function App() {
   const [board, setBoard] = useState<Board>(initialBoard)
   const [isFormDisplayed, setIsFormDisplayed] = useState(false)
+  const [editCardData, setEditCardData] = useState<BoardItem>()
 
   function createNewCard(value: string) {
     const copyBoard = { ...board }
@@ -53,20 +54,40 @@ function App() {
     setBoard(copyBoard)
   }
 
+  function editCard(newCardData: BoardItem) {
+    const copyBoard = { ...board }
+    copyBoard[newCardData.colId].set(newCardData.itemId, newCardData)
+    setBoard(copyBoard)
+    setIsFormDisplayed(false)
+    setEditCardData(undefined)
+  }
+
+  function handleEditCard(cardData: BoardItem) {
+    setEditCardData(cardData)
+    setIsFormDisplayed(true)
+  }
+
+  function displayForm() {
+    setIsFormDisplayed(true)
+  }
+
   const columns = Object.entries(board).map(([colId, items]) => {
     const listItems = Array.from(items.values())
-    console.log({ listItems })
+
     return (
       <Column
         key={colId}
         colId={colId as ColumnType}
+        editCardData={editCardData}
+        onEditCard={handleEditCard}
+        editCard={editCard}
         items={listItems}
-        displayForm={displayForm}
+        displayForm={isFormDisplayed}
         onColumnDrop={handleCardDrop}
-        onAddNewCard={() => setDisplayForm(true)}
+        onAddNewCard={displayForm}
         createNewCard={createNewCard}
-        hideForm={() => setDisplayForm(false)}
-        handleCardDelete={handleCardDelete}
+        hideForm={() => setIsFormDisplayed(false)}
+        onDeleteCard={handleCardDelete}
       />
     )
   })
