@@ -1,8 +1,8 @@
 import { BoardItem } from '@/App'
 import * as S from './Column.styles'
 import { CardBoard } from '@/components/CardBoard'
-import plusIcon from '../../../public/plus.svg'
 import { FormNewCard } from '../FormNewCard'
+import { PlusIcon } from '@radix-ui/react-icons'
 
 export type ColumnType = 'todo' | 'in_progress' | 'done'
 
@@ -20,6 +20,7 @@ type Props = {
   onAddNewCard(): void
   createNewCard(value: string): void
   hideForm(): void
+  handleCardDelete(colId: ColumnType, itemId: number): void
 }
 
 export function Column({
@@ -29,9 +30,14 @@ export function Column({
   onColumnDrop,
   onAddNewCard,
   createNewCard,
-  hideForm
+  hideForm,
+  handleCardDelete
 }: Props) {
   const isTodoCol = colId === 'todo'
+
+  function onDeleteCard(id: number) {
+    handleCardDelete(colId, id)
+  }
 
   return (
     <S.Wrapper
@@ -53,7 +59,7 @@ export function Column({
         </S.TitleContainer>
         {isTodoCol && (
           <S.AddButton onClick={onAddNewCard}>
-            <img src={plusIcon} />
+            <PlusIcon />
           </S.AddButton>
         )}
       </S.Header>
@@ -61,7 +67,7 @@ export function Column({
         <FormNewCard onCancel={hideForm} createNewCard={createNewCard} />
       )}
       {items.map((item) => (
-        <CardBoard key={item.itemId} data={item} />
+        <CardBoard key={item.itemId} data={item} onDelete={onDeleteCard} />
       ))}
     </S.Wrapper>
   )

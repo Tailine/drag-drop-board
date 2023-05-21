@@ -19,7 +19,8 @@ export const Header = styled('header', {
   position: 'sticky',
   height: '50px',
   top: 0,
-  backgroundColor: '$gray900'
+  backgroundColor: '$gray900',
+  alignItems: 'center'
 })
 
 export const TitleContainer = styled('div', {
@@ -28,7 +29,7 @@ export const TitleContainer = styled('div', {
 })
 
 export const Title = styled('h3', {
-  color: '$gray',
+  color: '$gray400',
   textTransform: 'capitalize',
   fontSize: '1.6rem'
 })
@@ -38,7 +39,7 @@ export const TotalCards = styled('p', {
   borderRadius: '$rounded',
   backgroundColor: '$orange',
   marginLeft: '$xs',
-  color: '$gray'
+  color: '$gray400'
 })
 
 export const AddButton = styled('button', {
@@ -46,8 +47,5 @@ export const AddButton = styled('button', {
   background: 'transparent',
   cursor: 'pointer',
   height: '16px',
-
-  img: {
-    width: '1.6rem'
-  }
+  color: '$gray400'
 })

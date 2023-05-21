@@ -47,6 +47,12 @@ function App() {
     }
   }
 
+  function handleCardDelete(colId: ColumnType, itemId: number) {
+    const copyBoard = { ...board }
+    copyBoard[colId].delete(itemId)
+    setBoard(copyBoard)
+  }
+
   const columns = Object.entries(board).map(([colId, items]) => {
     const listItems = Array.from(items.values())
     console.log({ listItems })
@@ -60,6 +66,7 @@ function App() {
         onAddNewCard={() => setDisplayForm(true)}
         createNewCard={createNewCard}
         hideForm={() => setDisplayForm(false)}
+        handleCardDelete={handleCardDelete}
       />
     )
   })

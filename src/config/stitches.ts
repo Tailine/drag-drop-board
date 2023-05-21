@@ -7,9 +7,10 @@ export const { styled } = createStitches({
       gray800: '#222530',
       gray700: '#222530',
       gray600: '#3a3f51',
+      gray500: '#363b4f',
+      gray400: '#fafcfe',
       blue: '#1a4a9e',
-      orange: '#ff5d44',
-      gray: '#fafcfe'
+      orange: '#ff5d44'
     },
     fontSizes: {
       sm: '1.2rem',

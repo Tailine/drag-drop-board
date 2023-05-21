@@ -11,17 +11,17 @@ export const Textarea = styled('textarea', {
   borderRadius: '$rounded',
   border: '1px solid $gray600',
   padding: '.3rem',
-  color: '$gray',
+  color: '$gray400',
   fontSize: '$md',
   paddingLeft: '$xs',
   '&::placeholder': {
-    color: '$gray'
+    color: '$gray400'
   }
 })
 
 export const Button = styled('button', {
   padding: '.3rem $xs',
-  color: '$gray',
+  color: '$gray400',
   cursor: 'pointer',
   borderRadius: '$rounded'
 })
