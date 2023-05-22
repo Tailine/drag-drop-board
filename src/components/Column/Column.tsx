@@ -15,13 +15,13 @@ export const columnTitle: Record<ColumnType, string> = {
 type Props = {
   colId: ColumnType
   items: BoardItem[]
-  displayForm: boolean
+  displayedFormId: ColumnType | undefined
   editCardData?: BoardItem
+  onAddNewCard(colId: ColumnType): void
   onColumnDrop(data: BoardItem, prevCol: ColumnType, currCol: ColumnType): void
-  onAddNewCard(): void
-  createNewCard(value: string): void
+  createNewCard(colId: ColumnType, value: string): void
   hideForm(): void
-  onDeleteCard(colId: ColumnType, itemId: number): void
+  onDeleteCard(colId: ColumnType, itemId: string): void
   onEditCard(cardData: BoardItem): void
   editCard(cardData: BoardItem): void
 }
@@ -29,8 +29,8 @@ type Props = {
 export function Column({
   colId,
   items,
-  displayForm,
   editCardData,
+  displayedFormId,
   onColumnDrop,
   onAddNewCard,
   createNewCard,
@@ -39,10 +39,12 @@ export function Column({
   onEditCard,
   editCard
 }: Props) {
-  const isTodoCol = colId === 'todo'
-
-  function handleDelete(id: number) {
+  function handleDelete(id: string) {
     onDeleteCard(colId, id)
+  }
+
+  function handleCreateNewCard(value: string) {
+    createNewCard(colId, value)
   }
 
   const cards = items.map((item) => {
@@ -51,7 +53,7 @@ export function Column({
         <FormNewCard
           key="edit-form"
           initialValue={editCardData}
-          createNewCard={createNewCard}
+          createNewCard={handleCreateNewCard}
           editCard={editCard}
           onCancel={hideForm}
         />
@@ -84,14 +86,12 @@ export function Column({
           <S.Title>{columnTitle[colId]}</S.Title>
           <S.TotalCards>{items.length}</S.TotalCards>
         </S.TitleContainer>
-        {isTodoCol && (
-          <S.AddButton onClick={onAddNewCard}>
-            <PlusIcon />
-          </S.AddButton>
-        )}
+        <S.AddButton onClick={() => onAddNewCard(colId)}>
+          <PlusIcon />
+        </S.AddButton>
       </S.Header>
-      {!editCardData && isTodoCol && displayForm && (
-        <FormNewCard onCancel={hideForm} createNewCard={createNewCard} />
+      {!editCardData && displayedFormId === colId && (
+        <FormNewCard onCancel={hideForm} createNewCard={handleCreateNewCard} />
       )}
       {cards}
     </S.Wrapper>

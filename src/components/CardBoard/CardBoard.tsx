@@ -7,7 +7,7 @@ import { Card } from '@/components/Card'
 
 type Props = {
   data: BoardItem
-  onDelete(id: number): void
+  onDelete(id: string): void
   onEdit(cardData: BoardItem): void
 }
 
