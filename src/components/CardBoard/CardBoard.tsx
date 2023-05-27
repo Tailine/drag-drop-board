@@ -12,8 +12,6 @@ type Props = {
 }
 
 export function CardBoard({ data, onDelete, onEdit }: Props) {
-  const dragItem = useRef<HTMLDivElement>(null)
-
   function handleDragStart(e: DragEvent<HTMLDivElement>) {
     e.dataTransfer.setData('text/plain', JSON.stringify(data))
   }
@@ -28,7 +26,6 @@ export function CardBoard({ data, onDelete, onEdit }: Props) {
 
   return (
     <Card
-      ref={dragItem}
       draggable
       onDragStart={handleDragStart}
       onDragEnd={(e) => console.log('End', e)}
