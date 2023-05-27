@@ -6,11 +6,21 @@ export const Wrapper = styled('section', {
   width: '30%',
   minHeight: '70vh',
   borderRadius: '.5rem',
-  border: '1px solid $gray700',
   padding: '0 $md',
   maxHeight: '500px',
   overflowY: 'scroll',
-  position: 'relative'
+  position: 'relative',
+
+  variants: {
+    borderStyles: {
+      default: {
+        border: '1px solid $gray700'
+      },
+      active: {
+        border: '2px dashed $orange'
+      }
+    }
+  }
 })
 
 export const Header = styled('header', {

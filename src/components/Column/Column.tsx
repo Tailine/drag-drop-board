@@ -3,6 +3,7 @@ import * as S from './Column.styles'
 import { CardBoard } from '@/components/CardBoard'
 import { FormNewCard } from '../FormNewCard'
 import { PlusIcon } from '@radix-ui/react-icons'
+import { useState } from 'react'
 
 export type ColumnType = 'todo' | 'in_progress' | 'done'
 
@@ -39,6 +40,8 @@ export function Column({
   onEditCard,
   editCard
 }: Props) {
+  const [isItemOverColumn, setIsItemOverColumn] = useState(false)
+
   function handleDelete(id: string) {
     onDeleteCard(colId, id)
   }
@@ -69,12 +72,24 @@ export function Column({
     )
   })
 
+  const border = isItemOverColumn ? 'active' : 'default'
+
   return (
     <S.Wrapper
       className="dropzone"
-      onDragOver={(e) => e.preventDefault()}
+      borderStyles={border}
+      onDragLeave={() => {
+        setIsItemOverColumn(false)
+      }}
+      onDragEnter={() => {
+        setIsItemOverColumn(true)
+      }}
+      onDragOver={(e) => {
+        e.preventDefault()
+      }}
       onDrop={(e) => {
         e.preventDefault()
+        setIsItemOverColumn(false)
         const movedCard: BoardItem = JSON.parse(
           e.dataTransfer.getData('text/plain')
         )
