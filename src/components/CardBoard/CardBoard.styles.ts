@@ -29,7 +29,7 @@ export const Content = styled('div', {
   alignItems: 'center',
   color: '$gray400',
   [`& ${Button}`]: {
-    display: 'block'
+    display: 'none'
   },
 
   '&:hover': {
