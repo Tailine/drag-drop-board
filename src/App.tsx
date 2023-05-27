@@ -95,7 +95,11 @@ function App() {
     )
   })
 
-  return <S.Wrapper>{columns}</S.Wrapper>
+  return (
+    <S.Main>
+      <S.Wrapper>{columns}</S.Wrapper>
+    </S.Main>
+  )
 }
 
 export default App
